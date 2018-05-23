@@ -54,7 +54,7 @@ bool tresEnRaya(int*** tablero){
             game = false;
         }
     }
-    if (getValor(tablero, 0, 0, 0) == getValor(tablero, 0, 1, 0) &&
+    if (getValor(tablero, 0, 0, 0) == getValor(tablero, 0, 1, 1) &&
         getValor(tablero, 0, 1, 1) == getValor(tablero, 0, 2, 2)){
         if (getValor(tablero, 0, 0, 0) == 1){
             cout << "Gano el jugador 1" << endl;
@@ -131,7 +131,7 @@ bool tresEnRaya(int*** tablero){
             game = false;
         }
     }
-    if (getValor(tablero, 1, 0, 0) == getValor(tablero, 1, 1, 0) &&
+    if (getValor(tablero, 1, 0, 0) == getValor(tablero, 1, 1, 1) &&
         getValor(tablero, 1, 1, 1) == getValor(tablero, 1, 2, 2)){
         if (getValor(tablero, 1, 0, 0) == 1){
             cout << "Gano el jugador 1" << endl;
@@ -208,7 +208,7 @@ bool tresEnRaya(int*** tablero){
             game = false;
         }
     }
-    if (getValor(tablero, 2, 0, 0) == getValor(tablero, 2, 1, 0) &&
+    if (getValor(tablero, 2, 0, 0) == getValor(tablero, 2, 1, 1) &&
         getValor(tablero, 2, 1, 1) == getValor(tablero, 2, 2, 2)){
         if (getValor(tablero, 2, 0, 0) == 1){
             cout << "Gano el jugador 1" << endl;
