@@ -30,240 +30,73 @@ bool setValor(int*** tablero, int i, int j, int k, int player){
     else
         return false;
 }
-bool tresEnRaya(int*** tablero){
-    bool game = true;
-    if (getValor(tablero, 0, 0, 0) == getValor(tablero, 0, 0, 1) &&
-        getValor(tablero, 0, 0, 1) == getValor(tablero, 0, 0, 2)){
-        if (getValor(tablero, 0, 0, 0) == 1){
-            cout << "Gano el jugador 1" << endl;
-            game = false;
+int tresEnRaya(int*** tablero){
+    int c(0), c1(0), c2(0), c3(0),  c4(0),  c5(0),  c6(0),  c7(0),  c8(0);
+    int d(0), d1(0), d2(0), d3(0),  d4(0),  d5(0),  d6(0),  d7(0),  d8(0);
+    for(int i = 0; i < 3; ++i)
+    {
+        c3 = 0; c4 = 0; c8 = 0;
+        d3 = 0; d4 = 0; d8 = 0;
+        if(getValor(tablero, i, i, i) == 1)//me analiza la  diagonal en los 3 planos a la vez (1)
+            ++c6;                                                           //        (1)
+        //          (1)
+        if (getValor(tablero, i, i, i) == 2)
+            ++d6;
+        if(getValor(tablero, i, i, 2 - i) == 1)//lo mismo pero      (1)
+            ++c7;           //                        (1)
+        //                          (1)
+        if (getValor(tablero, i, i, 2 - i) == 2)
+            ++d7;
+        for(int j = 0; j < 3; ++j)
+        {
+            c = 0; c1 = 0; c2 = 0;
+            d = 0; d1 = 0; d2 = 0;
+            for(int t = 0; t < 3; ++t)
+            {
+                if(getValor(tablero, i, j, t) == 1)//me analiza los (1 1 1)en un mismo plano
+                    ++c;
+                if(getValor(tablero, i, j, t) == 2)
+                    ++d;
+                if(getValor(tablero, i, t, j) == 1)//me analiza los (100)
+                    ++c1;                //               (100)
+                //                (100)en un mismo plano
+                if(getValor(tablero, i, t, j) == 2)
+                    ++d1;
+                if(getValor(tablero, t, i, j) == 1)//me analiza 1 que esta en la misma poscicion pero en diferente �plano
+                    ++c2;
+                if(getValor(tablero, t, i, j) == 2)
+                    ++d2;
+            }
+            if(c == 3 || c1 == 3 || c2 == 3)
+                return 1;
+            if (d == 3 || d1 == 3 || d2 == 3)
+                return 2;
+            if(getValor(tablero, j, i, j) == 1)//me analiza los (1)
+                ++c3;                  //             (1)
+            //            (1)pero en diferentes planos
+            if(getValor(tablero, j, i, j) == 2)
+                ++d3;
+            if(getValor(tablero, j, j, i) == 1)//me analiza los(1 1 1) en diferentes planos
+                ++c4;
+            if(getValor(tablero, j, j, i) == 2)
+                ++d4;
+            if(getValor(tablero, i, j, j) == 1)//me analiza (1)
+                ++c5;                   //          (1)
+            //              (1)en un mismo plano
+            if(getValor(tablero, i, j, j) == 2)
+                ++d5;
+            if(getValor(tablero, i, j, 2 - j) == 1)//me analiza los         (1)
+                ++c8;                   //                     (1)
+            //                    (1)en un mismo plano;
+            if(getValor(tablero, i, j, 2 - j) == 2)
+                ++d8;
         }
-        else if (getValor(tablero, 0, 0, 0) == 2){
-            cout << "Gano el jugador 2" << endl;
-            game = false;
-        }
+        if(c3 == 3 || c4 == 3 || c6 == 3 || c5 == 3 || c7 == 3 || c8 == 3)
+            return 1;
+        if(d3 == 3 || d4 == 3 || d6 == 3 || d5 == 3 || d7 == 3 || d8 == 3)
+            return 2;
     }
-    if (getValor(tablero, 0, 0, 0) == getValor(tablero, 0, 1, 0) &&
-        getValor(tablero, 0, 1, 0) == getValor(tablero, 0, 2, 0)){
-        if (getValor(tablero, 0, 0, 0) == 1){
-            cout << "Gano el jugador 1" << endl;
-            game = false;
-        }
-        else if (getValor(tablero, 0, 0, 0) == 2){
-            cout << "Gano el jugador 2" << endl;
-            game = false;
-        }
-    }
-    if (getValor(tablero, 0, 0, 0) == getValor(tablero, 0, 1, 1) &&
-        getValor(tablero, 0, 1, 1) == getValor(tablero, 0, 2, 2)){
-        if (getValor(tablero, 0, 0, 0) == 1){
-            cout << "Gano el jugador 1" << endl;
-            game = false;
-        }
-        else if (getValor(tablero, 0, 0, 0) == 2){
-            cout << "Gano el jugador 2" << endl;
-            game = false;
-        }
-    }
-    if (getValor(tablero, 0, 0, 2) == getValor(tablero, 0, 1, 2) &&
-        getValor(tablero, 0, 1, 2) == getValor(tablero, 0, 2, 2)){
-        if (getValor(tablero, 0, 0, 2) == 1){
-            cout << "Gano el jugador 1" << endl;
-            game = false;
-        }
-        else if (getValor(tablero, 0, 0, 2) == 2){
-            cout << "Gano el jugador 2" << endl;
-            game = false;
-        }
-    }
-    if (getValor(tablero, 0, 2, 0) == getValor(tablero, 0, 2, 1) &&
-        getValor(tablero, 0, 2, 1) == getValor(tablero, 0, 2, 2)){
-        if (getValor(tablero, 0, 2, 0) == 1){
-            cout << "Gano el jugador 1" << endl;
-            game = false;
-        }
-        else if (getValor(tablero, 0, 2, 0) == 2){
-            cout << "Gano el jugador 2" << endl;
-            game = false;
-        }
-    }
-    if (getValor(tablero, 0, 1, 0) == getValor(tablero, 0, 1, 1) &&
-        getValor(tablero, 0, 1, 1) == getValor(tablero, 0, 1, 2)){
-        if (getValor(tablero, 0, 1, 0) == 1){
-            cout << "Gano el jugador 1" << endl;
-            game = false;
-        }
-        else if (getValor(tablero, 0, 1, 0) == 2){
-            cout << "Gano el jugador 2" << endl;
-            game = false;
-        }
-    }
-    if (getValor(tablero, 0, 0, 2) == getValor(tablero, 0, 1, 1) &&
-        getValor(tablero, 0, 1, 1) == getValor(tablero, 0, 2, 2)){
-        if (getValor(tablero, 0, 0, 2) == 1){
-            cout << "Gano el jugador 1" << endl;
-            game = false;
-        }
-        else if (getValor(tablero, 0, 0, 2) == 2){
-            cout << "Gano el jugador 2" << endl;
-            game = false;
-        }
-    }
-    if (getValor(tablero, 1, 0, 0) == getValor(tablero, 1, 0, 1) &&
-        getValor(tablero, 1, 0, 1) == getValor(tablero, 1, 0, 2)){
-        if (getValor(tablero, 1, 0, 0) == 1){
-            cout << "Gano el jugador 1" << endl;
-            game = false;
-        }
-        else if (getValor(tablero, 1, 0, 0) == 2){
-            cout << "Gano el jugador 2" << endl;
-            game = false;
-        }
-    }
-    if (getValor(tablero, 1, 0, 0) == getValor(tablero, 1, 1, 0) &&
-        getValor(tablero, 1, 1, 0) == getValor(tablero, 1, 2, 0)){
-        if (getValor(tablero, 1, 0, 0) == 1){
-            cout << "Gano el jugador 1" << endl;
-            game = false;
-        }
-        else if (getValor(tablero, 1, 0, 0) == 2){
-            cout << "Gano el jugador 2" << endl;
-            game = false;
-        }
-    }
-    if (getValor(tablero, 1, 0, 0) == getValor(tablero, 1, 1, 1) &&
-        getValor(tablero, 1, 1, 1) == getValor(tablero, 1, 2, 2)){
-        if (getValor(tablero, 1, 0, 0) == 1){
-            cout << "Gano el jugador 1" << endl;
-            game = false;
-        }
-        else if (getValor(tablero, 1, 0, 0) == 2){
-            cout << "Gano el jugador 2" << endl;
-            game = false;
-        }
-    }
-    if (getValor(tablero, 1, 0, 2) == getValor(tablero, 1, 1, 2) &&
-        getValor(tablero, 1, 1, 2) == getValor(tablero, 1, 2, 2)){
-        if (getValor(tablero, 1, 0, 2) == 1){
-            cout << "Gano el jugador 1" << endl;
-            game = false;
-        }
-        else if (getValor(tablero, 1, 0, 2) == 2){
-            cout << "Gano el jugador 2" << endl;
-            game = false;
-        }
-    }
-    if (getValor(tablero, 1, 2, 0) == getValor(tablero, 1, 2, 1) &&
-        getValor(tablero, 1, 2, 1) == getValor(tablero, 1, 2, 2)){
-        if (getValor(tablero, 1, 2, 0) == 1){
-            cout << "Gano el jugador 1" << endl;
-            game = false;
-        }
-        else if (getValor(tablero, 1, 2, 0) == 2){
-            cout << "Gano el jugador 2" << endl;
-            game = false;
-        }
-    }
-    if (getValor(tablero, 1, 1, 0) == getValor(tablero, 1, 1, 1) &&
-        getValor(tablero, 1, 1, 1) == getValor(tablero, 1, 1, 2)){
-        if (getValor(tablero, 1, 1, 0) == 1){
-            cout << "Gano el jugador 1" << endl;
-            game = false;
-        }
-        else if (getValor(tablero, 1, 1, 0) == 2){
-            cout << "Gano el jugador 2" << endl;
-            game = false;
-        }
-    }
-    if (getValor(tablero, 1, 0, 2) == getValor(tablero, 1, 1, 1) &&
-        getValor(tablero, 1, 1, 1) == getValor(tablero, 1, 2, 2)){
-        if (getValor(tablero, 1, 0, 2) == 1){
-            cout << "Gano el jugador 1" << endl;
-            game = false;
-        }
-        else if (getValor(tablero, 1, 0, 2) == 2){
-            cout << "Gano el jugador 2" << endl;
-            game = false;
-        }
-    }
-    if (getValor(tablero, 2, 0, 0) == getValor(tablero, 2, 0, 1) &&
-        getValor(tablero, 2, 0, 1) == getValor(tablero, 2, 0, 2)){
-        if (getValor(tablero, 2, 0, 0) == 1){
-            cout << "Gano el jugador 1" << endl;
-            game = false;
-        }
-        else if (getValor(tablero, 2, 0, 0) == 2){
-            cout << "Gano el jugador 2" << endl;
-            game = false;
-        }
-    }
-    if (getValor(tablero, 2, 0, 0) == getValor(tablero, 2, 1, 0) &&
-        getValor(tablero, 2, 1, 0) == getValor(tablero, 2, 2, 0)){
-        if (getValor(tablero, 2, 0, 0) == 1){
-            cout << "Gano el jugador 1" << endl;
-            game = false;
-        }
-        else if (getValor(tablero, 2, 0, 0) == 2){
-            cout << "Gano el jugador 2" << endl;
-            game = false;
-        }
-    }
-    if (getValor(tablero, 2, 0, 0) == getValor(tablero, 2, 1, 1) &&
-        getValor(tablero, 2, 1, 1) == getValor(tablero, 2, 2, 2)){
-        if (getValor(tablero, 2, 0, 0) == 1){
-            cout << "Gano el jugador 1" << endl;
-            game = false;
-        }
-        else if (getValor(tablero, 2, 0, 0) == 2){
-            cout << "Gano el jugador 2" << endl;
-            game = false;
-        }
-    }
-    if (getValor(tablero, 2, 0, 2) == getValor(tablero, 2, 1, 2) &&
-        getValor(tablero, 2, 1, 2) == getValor(tablero, 2, 2, 2)){
-        if (getValor(tablero, 2, 0, 2) == 1){
-            cout << "Gano el jugador 1" << endl;
-            game = false;
-        }
-        else if (getValor(tablero, 2, 0, 2) == 2){
-            cout << "Gano el jugador 2" << endl;
-            game = false;
-        }
-    }
-    if (getValor(tablero, 2, 2, 0) == getValor(tablero, 2, 2, 1) &&
-        getValor(tablero, 2, 2, 1) == getValor(tablero, 2, 2, 2)){
-        if (getValor(tablero, 2, 2, 0) == 1){
-            cout << "Gano el jugador 1" << endl;
-            game = false;
-        }
-        else if (getValor(tablero, 2, 2, 0) == 2){
-            cout << "Gano el jugador 2" << endl;
-            game = false;
-        }
-    }
-    if (getValor(tablero, 2, 1, 0) == getValor(tablero, 2, 1, 1) &&
-        getValor(tablero, 2, 1, 1) == getValor(tablero, 2, 1, 2)){
-        if (getValor(tablero, 2, 1, 0) == 1){
-            cout << "Gano el jugador 1" << endl;
-            game = false;
-        }
-        else if (getValor(tablero, 2, 1, 0) == 2){
-            cout << "Gano el jugador 2" << endl;
-            game = false;
-        }
-    }
-    if (getValor(tablero, 2, 0, 2) == getValor(tablero, 2, 1, 1) &&
-        getValor(tablero, 2, 1, 1) == getValor(tablero, 2, 2, 2)){
-        if (getValor(tablero, 2, 0, 2) == 1){
-            cout << "Gano el jugador 1" << endl;
-            game = false;
-        }
-        else if (getValor(tablero, 2, 0, 2) == 2){
-            cout << "Gano el jugador 2" << endl;
-            game = false;
-        }
-    }
-    return game;
+    return 0;
 }
 
 int main() {
@@ -281,23 +114,22 @@ int main() {
     int n = sizeof(tablero[0])/ sizeof(int);
     int p = sizeof(tablero[0][0])/ sizeof(int);
     printTablero(tablero, m, n, p);
-    int x, y, z, player = 1;
-    bool game = true;
-    while (game){
+    int x, y, z, player = 1, game = 0;
+    while (game == 0){
         printf("Jugador %d:\n", player);
-        cout << "Coordenada X: ";
+        //cout << "Coordenada X: ";
         cin >> x;
-        cout << "Coordenada Y: ";
+        //cout << "Coordenada Y: ";
         cin >> y;
-        cout << "Coordenada Z: ";
+        //cout << "Coordenada Z: ";
         cin >> z;
-        if (x > 2 || y > 2 || z > 2){
+        while (x > 2 || y > 2 || z > 2){
             cout << "Error. Ingrese numeros entre 0 y 2.\n";
-            cout << "Coordenada X: ";
+            //cout << "Coordenada X: ";
             cin >> x;
-            cout << "Coordenada Y: ";
+            //cout << "Coordenada Y: ";
             cin >> y;
-            cout << "Coordenada Z: ";
+            //cout << "Coordenada Z: ";
             cin >> z;
         }
         if (setValor(tablero, x, y, z, player)){
@@ -306,6 +138,10 @@ int main() {
             if (player == 3)
                 player = 1;
             printTablero(tablero, m, n, p);
+            if (game == 1)
+                cout << "GANÓ JUGADOR 1" << endl;
+            else if (game == 2)
+                cout << "GANÓ JUGADOR 2" << endl;
         }
     }
     return 0;
